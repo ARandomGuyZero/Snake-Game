@@ -6,6 +6,9 @@ Date: September 7th 2024
 Update: September 8th 2024
 
 This script generates the famous snake game.
+The user starts with a snake with a length of three squares.
+The user can get fruit, which increases the score and the length of the snake.
+The user loses if they collide with a wall or with the snake's body.
 """
 
 from turtle import Screen
@@ -13,7 +16,7 @@ from turtle import Screen
 from scoreboard import Scoreboard
 from snake import Snake
 from food import Food
-import time
+from time import sleep
 
 # Generates a new screen
 screen = Screen()
@@ -40,7 +43,7 @@ while game_is_on:
 
     # Updates the screen to give the impression the snake is moving
     screen.update()
-    time.sleep(0.1)
+    sleep(0.1)
     snake.move()
 
     # Detect collision with food using the snake's distance
