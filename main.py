@@ -3,12 +3,16 @@ Snake Game
 
 Author: Alan
 Date: September 7th 2024
+Update: September 8th 2024
 
-This script generates famous snake game.
+This script generates the famous snake game.
 """
 
 from turtle import Screen
+
+from scoreboard import Scoreboard
 from snake import Snake
+from food import Food
 import time
 
 # Generates a new screen
@@ -19,6 +23,8 @@ screen.title("Snake") # Changes the window's title
 screen.tracer(0) # Freezes the screen animation
 
 snake = Snake()
+food = Food()
+scoreboard = Scoreboard()
 
 game_is_on = True
 
@@ -35,7 +41,23 @@ while game_is_on:
     # Updates the screen to give the impression the snake is moving
     screen.update()
     time.sleep(0.1)
-
     snake.move()
+
+    # Detect collision with food using the snake's distance
+    if snake.head.distance(food) < 15:
+        food.refresh()
+        snake.extend()
+        scoreboard.increase_score()
+
+    # Detect collision with wall
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
+        game_is_on = False
+        scoreboard.game_over()
+
+    # Defect collision with wall
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            game_is_on = False
+            scoreboard.game_over()
 
 screen.exitonclick()

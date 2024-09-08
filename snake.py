@@ -18,14 +18,26 @@ class Snake:
 
     def create_snake(self):
         """
-        Creates a new snake of 3 squares
+        Creates a new snake of three squares
         """
         for position in STARTING_POSITIONS:
-            new_segment = Turtle("square") # New square-shaped segment
-            new_segment.color("white") # Change color to white
-            new_segment.penup() # Disable drawing
-            new_segment.goto(position) # This snake goes to new position
-            self.segments.append(new_segment)
+            self.add_segment(position)
+
+    def extend(self):
+        """
+        Adds a new segment to the snake
+        """
+        self.add_segment(self.segments[-1].position())
+
+    def add_segment(self, position):
+        """
+        Creates a new segment
+        """
+        new_segment = Turtle("square")  # New square-shaped segment
+        new_segment.color("white")  # Change color to white
+        new_segment.penup()  # Disable drawing
+        new_segment.goto(position)  # This snake goes to new position
+        self.segments.append(new_segment)
 
     def move(self):
         """
