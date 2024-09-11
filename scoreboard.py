@@ -9,29 +9,41 @@ class Scoreboard(Turtle):
     """
     def __init__(self):
         super().__init__()
-        self.total_score = 0
+        self.score = 0
+        self.high_score = 0
         self.hideturtle()
         self.goto(0, 280)
         self.pencolor("white")
         self.show_score()
+
+    def read_highscore(self):
+        """
+        Reads the highscore from the data.txt file
+        """
+        with open("data.txt", mode="r") as file:
+            self.high_score = int(file.read())
 
     def show_score(self):
         """
         Shows the score of the game in the screen
         """
         self.clear()
-        self.write(f"Score: {self.total_score}", align=ALIGNMENT, font=FONT)
+        self.read_highscore()
+        self.write(f"Score: {self.score} High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
-    def game_over(self):
+    def reset(self):
         """
-        Shows once the game is over
+        Checks if the score of the game is higher than high score, if it is, it updates it
         """
-        self.goto(0, 0)
-        self.write(f"Game Over", align=ALIGNMENT, font=FONT)
+        if self.score > self.high_score:
+            with open("data.txt", mode="w") as file:
+                file.write(f"{self.score}")
+        self.score = 0
+        self.show_score()
 
     def increase_score(self):
         """
         Increases the score by one
         """
-        self.total_score += 1
+        self.score += 1
         self.show_score()

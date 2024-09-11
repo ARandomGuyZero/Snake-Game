@@ -39,6 +39,16 @@ class Snake:
         new_segment.goto(position)  # This snake goes to new position
         self.segments.append(new_segment)
 
+    def reset(self):
+        """
+        Resets the snake
+        """
+        for segment in self.segments:
+            segment.reset()
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
     def move(self):
         """
         Moves the snake by moving each segment from the end of the snake's tail to the next segment's coordinates.
