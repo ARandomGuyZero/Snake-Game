@@ -3,7 +3,7 @@ Snake Game
 
 Author: Alan
 Date: September 7th 2024
-Update: September 8th 2024
+Update: September 11th 2024
 
 This script generates the famous snake game.
 The user starts with a snake with a length of three squares.
